@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
     import TodoList from './components/TodoList';
     import TodoForm from './components/TodoForm';
+    import { useSpring, animated } from 'react-spring';
 
     const App = () => {
       const [todos, setTodos] = useState([]);
@@ -30,14 +31,20 @@ import React, { useState, useEffect } from 'react';
         setTodos(todos.filter((todo) => todo.id !== id));
       };
 
+      const fadeIn = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        config: { duration: 500 },
+      });
+
       return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <animated.div style={fadeIn} className="min-h-screen bg-gray-100 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h1 className="text-2xl font-bold mb-4">Todo App</h1>
             <TodoForm addTodo={addTodo} />
             <TodoList todos={todos} toggleComplete={toggleComplete} removeTodo={removeTodo} />
           </div>
-        </div>
+        </animated.div>
       );
     };
 
