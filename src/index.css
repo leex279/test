@@ -1,3 +1,32 @@
 @tailwind base;
     @tailwind components;
     @tailwind utilities;
+
+    /* Dark mode styles */
+    @layer base {
+      .dark {
+        @apply bg-gray-900 text-gray-100;
+      }
+    }
+
+    @layer components {
+      .dark .bg-white {
+        @apply bg-gray-800;
+      }
+
+      .dark .border-gray-200 {
+        @apply border-gray-700;
+      }
+
+      .dark .text-gray-900 {
+        @apply text-gray-100;
+      }
+
+      .dark .text-red-500 {
+        @apply text-red-400;
+      }
+
+      .dark .focus\\:ring-blue-500:focus {
+        @apply ring-blue-400;
+      }
+    }

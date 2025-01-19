@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 
     const App = () => {
       const [todos, setTodos] = useState([]);
+      const [darkMode, setDarkMode] = useState(false);
 
       useEffect(() => {
         const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -38,9 +39,17 @@ import React, { useState, useEffect } from 'react';
       });
 
       return (
-        <animated.div style={fadeIn} className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <animated.div style={fadeIn} className={`min-h-screen flex items-center justify-center ${darkMode ? 'dark' : ''}`}>
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h1 className="text-2xl font-bold mb-4">Todo App</h1>
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-2xl font-bold">Todo App</h1>
+              <button
+                className="text-gray-900"
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                {darkMode ? 'Light Mode' : 'Dark Mode'}
+              </button>
+            </div>
             <TodoForm addTodo={addTodo} />
             <TodoList todos={todos} toggleComplete={toggleComplete} removeTodo={removeTodo} />
           </div>
